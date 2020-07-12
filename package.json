@@ -1,0 +1,25 @@
+{
+  "name": "dynamodb-utility",
+  "version": "0.0.1",
+  "description": "Simple DynamoDB Utility",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc"
+  },
+  "keywords": [
+    "typescript",
+    "dynamodb",
+    "utility"
+  ],
+  "author": "Thitiwut Somsa <kizzaraiva@gmail.com>",
+  "license": "ISC",
+  "types": "dist/index.d.ts",
+  "devDependencies": {
+    "@types/node": "^14.0.22",
+    "typescript": "^3.9.6"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.713.0"
+  }
+}
