@@ -15,7 +15,9 @@ export class DynamodbUtil {
     this.documentClient = new DocumentClient({
       apiVersion: 'latest',
       convertEmptyValues : true,
-      region: (utilOptions && utilOptions.region) ? utilOptions.region : (process.env.REGION) ? process.env.REGION : 'ap-southeast-2',
+      region: (utilOptions && utilOptions.region) ? utilOptions.region : (process.env.AWS_REGION) ? process.env.AWS_REGION : 'ap-southeast-2',
+      accessKeyId:  (utilOptions && utilOptions.accessKeyId) ? utilOptions.accessKeyId : undefined,
+      secretAccessKey: (utilOptions && utilOptions.secretAccessKey) ? utilOptions.secretAccessKey : undefined,
     });
     this.table = table;
     this.utilOptions = utilOptions;

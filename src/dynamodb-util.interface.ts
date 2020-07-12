@@ -35,4 +35,6 @@ export interface ScanOptions {
 export interface DynamoDBUtilOptions {
   region?: string;
   timestamp?: boolean;
+  accessKeyId?: string;
+  secretAccessKey?: string;
 }
