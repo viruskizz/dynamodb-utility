@@ -1,3 +1,3 @@
-import {DynamodbUtil} from '../src'
+import {DynamodbUtil} from '..'
 
 // const dynamodb = new DynamodbUtil()
