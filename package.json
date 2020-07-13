@@ -1,6 +1,6 @@
 {
   "name": "dynamodb-utility",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Simple DynamoDB Utility",
   "main": "dist/index.js",
   "scripts": {
@@ -21,5 +21,9 @@
   },
   "dependencies": {
     "aws-sdk": "^2.713.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/viruskizz/dynamodb-utility"
   }
 }

@@ -8,7 +8,7 @@ import {ScanQueryOptions, ScanOptions, DynamoDBUtilOptions} from './dynamodb-uti
 export class DynamodbUtil {
 
   private documentClient: DocumentClient;
-  private utilOptions: DynamoDBUtilOptions | undefined;
+  private readonly utilOptions: DynamoDBUtilOptions | undefined;
   private readonly table: string;
 
   constructor(table: string, utilOptions?: DynamoDBUtilOptions) {
