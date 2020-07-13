@@ -1,9 +1,10 @@
 {
   "name": "dynamodb-utility",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Simple DynamoDB Utility",
   "main": "dist/index.js",
   "scripts": {
+    "link": "tsc && copy /Y package.json dist && copy /Y readme.md dist && cd dist && npm link",
     "test": "jest",
     "build": "tsc"
   },
