@@ -8,6 +8,17 @@
     "test": "jest",
     "build": "tsc"
   },
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "aws-sdk": "^2.713.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.4",
+    "@types/node": "^14.0.22",
+    "jest": "^26.1.0",
+    "ts-jest": "^26.1.2",
+    "typescript": "^3.9.6"
+  },
   "keywords": [
     "typescript",
     "dynamodb",
@@ -15,13 +26,8 @@
   ],
   "author": "Thitiwut Somsa <kizzaraiva@gmail.com>",
   "license": "ISC",
-  "types": "dist/index.d.ts",
-  "devDependencies": {
-    "@types/node": "^14.0.22",
-    "typescript": "^3.9.6"
-  },
-  "dependencies": {
-    "aws-sdk": "^2.713.0"
+  "bugs": {
+    "url": "https://github.com/viruskizz/dynamodb-utility/issues"
   },
   "repository": {
     "type": "git",

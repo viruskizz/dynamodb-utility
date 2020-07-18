@@ -32,6 +32,32 @@ export interface ScanOptions {
   attributes?: string[];
 }
 
+export type ConditionFunction =
+  'equal' |
+  'greaterThan' |
+  'lessThan' |
+  'attribute_exists' |
+  'attribute_not_exists' |
+  'beginsWith' |
+  'contains' |
+  'size'
+export type KeyCondition = {
+  [x: string]: {
+    [cnfn in ConditionFunction | string]: string | null
+  } | string,
+}
+export interface QueryOptions {
+  limit?: number;
+  lastKey?: object;
+  times?: number
+  indexName?: string,
+  filter?: {
+    [x: string]: string,
+  };
+  keyCondition: KeyCondition
+  attributes?: string[];
+}
+
 export interface DynamoDBUtilOptions {
   region?: string;
   timestamp?: boolean;

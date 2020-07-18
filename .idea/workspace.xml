@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b7ec1b6-1c01-4d60-8c73-0b4dd87239c4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/examples/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/__tests__/payloads/mock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/example.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/example.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__tests__/index.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/__tests__/index.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dynamodb-util.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dynamodb-util.interface.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dynamodb-util.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dynamodb-util.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -19,21 +21,15 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/package.json">
+        <entry file="file://$PROJECT_DIR$/__tests__/index.test.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="7" column="19" lean-forward="true" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="46">
-              <caret line="2" column="45" selection-start-line="2" selection-start-column="45" selection-end-line="2" selection-end-column="45" />
+            <state relative-caret-position="668">
+              <caret line="54" column="80" selection-start-line="54" selection-start-column="80" selection-end-line="54" selection-end-column="80" />
+              <folding>
+                <element signature="e#0#38#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -41,8 +37,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/dynamodb-util.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="18" column="83" selection-start-line="18" selection-start-column="83" selection-end-line="18" selection-end-column="83" />
+            <state relative-caret-position="279">
+              <caret line="213" column="58" selection-start-line="213" selection-start-column="58" selection-end-line="213" selection-end-column="58" />
               <folding>
                 <element signature="e#0#53#0" expanded="true" />
               </folding>
@@ -51,37 +47,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tsconfig.json">
+        <entry file="file://$PROJECT_DIR$/src/dynamodb-util.interface.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="989">
-              <caret line="43" column="21" selection-start-line="43" selection-start-column="21" selection-end-line="43" selection-end-column="21" />
+            <state relative-caret-position="57">
+              <caret line="34" column="11" selection-start-line="34" selection-start-column="7" selection-end-line="34" selection-end-column="11" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/index.ts">
+        <entry file="file://$PROJECT_DIR$/__tests__/payloads/mock.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="69">
-              <caret line="3" column="46" selection-start-line="3" selection-start-column="46" selection-end-line="3" selection-end-column="46" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.npmignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="69">
-              <caret line="3" selection-start-line="3" selection-end-line="3" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="69">
-              <caret line="3" selection-start-line="3" selection-end-line="3" />
+            <state relative-caret-position="345">
+              <caret line="53" column="27" selection-start-line="53" selection-start-column="21" selection-end-line="53" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -93,6 +71,7 @@
       <find>decla</find>
       <find>REG</find>
       <find>REGION</find>
+      <find>Araiva</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -102,23 +81,24 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/index.ts" />
-        <option value="$PROJECT_DIR$/__tests__/index.test.ts" />
         <option value="$PROJECT_DIR$/.npmignore" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/dynamodb-util.interface.ts" />
         <option value="$PROJECT_DIR$/README.MD" />
         <option value="$PROJECT_DIR$/examples/example.ts" />
         <option value="$PROJECT_DIR$/examples/example.js" />
         <option value="$PROJECT_DIR$/tsconfig.json" />
         <option value="$PROJECT_DIR$/dist/package.json" />
-        <option value="$PROJECT_DIR$/src/dynamodb-util.ts" />
         <option value="$PROJECT_DIR$/examples/index.js" />
         <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/__tests__/payloads/mock.json" />
+        <option value="$PROJECT_DIR$/src/dynamodb-util.interface.ts" />
+        <option value="$PROJECT_DIR$/src/dynamodb-util.ts" />
+        <option value="$PROJECT_DIR$/__tests__/index.test.ts" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="45" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="47" />
     <option name="y" value="23" />
     <option name="width" value="1090" />
     <option name="height" value="1027" />
@@ -129,7 +109,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -140,7 +119,13 @@
             <path>
               <item name="dynamodb-utility" type="b2602c69:ProjectViewProjectNode" />
               <item name="dynamodb-utility" type="462c0819:PsiDirectoryNode" />
-              <item name="examples" type="462c0819:PsiDirectoryNode" />
+              <item name="__tests__" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dynamodb-utility" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dynamodb-utility" type="462c0819:PsiDirectoryNode" />
+              <item name="__tests__" type="462c0819:PsiDirectoryNode" />
+              <item name="payloads" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="dynamodb-utility" type="b2602c69:ProjectViewProjectNode" />
@@ -151,11 +136,13 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/node_modules/jest" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -183,6 +170,91 @@
       </list>
     </option>
   </component>
+  <component name="RunManager" selected="Jest.DynamoDBUtil Test Suite.query test.query with function beginsWith and filter">
+    <configuration name="DynamoDBUtil Test Suite.query test.query with function beginsWith and filter" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/__tests__/index.test.ts" />
+      <test-names>
+        <test-name value="DynamoDBUtil Test Suite" />
+        <test-name value="query test" />
+        <test-name value="query with function beginsWith and filter" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="DynamoDBUtil Test Suite.query test.query with function" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/__tests__/index.test.ts" />
+      <test-names>
+        <test-name value="DynamoDBUtil Test Suite" />
+        <test-name value="query test" />
+        <test-name value="query with function" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="DynamoDBUtil Test Suite.query with function beginsWith and filter" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/__tests__/index.test.ts" />
+      <test-names>
+        <test-name value="DynamoDBUtil Test Suite" />
+        <test-name value="query with function beginsWith and filter" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="DynamoDBUtil Test Suite.scan.query with function beginsWith and filter" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/__tests__/index.test.ts" />
+      <test-names>
+        <test-name value="DynamoDBUtil Test Suite" />
+        <test-name value="scan" />
+        <test-name value="query with function beginsWith and filter" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="DynamoDBUtil Test Suite.update testing.update add new body" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/__tests__/index.test.ts" />
+      <test-names>
+        <test-name value="DynamoDBUtil Test Suite" />
+        <test-name value="update testing" />
+        <test-name value="update add new body" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Jest.DynamoDBUtil Test Suite.query test.query with function beginsWith and filter" />
+        <item itemvalue="Jest.DynamoDBUtil Test Suite.scan.query with function beginsWith and filter" />
+        <item itemvalue="Jest.DynamoDBUtil Test Suite.query with function beginsWith and filter" />
+        <item itemvalue="Jest.DynamoDBUtil Test Suite.query test.query with function" />
+        <item itemvalue="Jest.DynamoDBUtil Test Suite.update testing.update add new body" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -196,23 +268,59 @@
       <workItem from="1594474149904" duration="5815000" />
       <workItem from="1594546054889" duration="4899000" />
       <workItem from="1594614953694" duration="809000" />
-      <workItem from="1594616152934" duration="3135000" />
+      <workItem from="1594616152934" duration="3737000" />
+      <workItem from="1594706239502" duration="4982000" />
+      <workItem from="1594890611970" duration="6000" />
+      <workItem from="1594890634646" duration="82000" />
+      <workItem from="1595058094413" duration="10033000" />
     </task>
     <servers />
   </component>
+  <component name="TestHistory">
+    <history-entry file="DynamoDBUtil_Test_Suite_scan_query_with_function_beginsWith_and_filter - 2020.07.18 at 18h 55m 38s.xml">
+      <configuration name="DynamoDBUtil Test Suite.scan.query with function beginsWith and filter" configurationId="JavaScriptTestRunnerJest" />
+    </history-entry>
+    <history-entry file="DynamoDBUtil_Test_Suite_scan_query_with_function_beginsWith_and_filter - 2020.07.18 at 18h 56m 57s.xml">
+      <configuration name="DynamoDBUtil Test Suite.scan.query with function beginsWith and filter" configurationId="JavaScriptTestRunnerJest" />
+    </history-entry>
+    <history-entry file="DynamoDBUtil_Test_Suite_scan_query_with_function_beginsWith_and_filter - 2020.07.18 at 18h 57m 09s.xml">
+      <configuration name="DynamoDBUtil Test Suite.scan.query with function beginsWith and filter" configurationId="JavaScriptTestRunnerJest" />
+    </history-entry>
+    <history-entry file="DynamoDBUtil_Test_Suite_query_test_query_with_function_beginsWith_and_filter - 2020.07.18 at 18h 58m 05s.xml">
+      <configuration name="DynamoDBUtil Test Suite.query test.query with function beginsWith and filter" configurationId="JavaScriptTestRunnerJest" />
+    </history-entry>
+    <history-entry file="DynamoDBUtil_Test_Suite_query_test_query_with_function_beginsWith_and_filter - 2020.07.18 at 18h 58m 12s.xml">
+      <configuration name="DynamoDBUtil Test Suite.query test.query with function beginsWith and filter" configurationId="JavaScriptTestRunnerJest" />
+    </history-entry>
+    <history-entry file="DynamoDBUtil_Test_Suite_query_test_query_with_function_beginsWith_and_filter - 2020.07.18 at 18h 58m 39s.xml">
+      <configuration name="DynamoDBUtil Test Suite.query test.query with function beginsWith and filter" configurationId="JavaScriptTestRunnerJest" />
+    </history-entry>
+    <history-entry file="DynamoDBUtil_Test_Suite_query_test_query_with_function_beginsWith_and_filter - 2020.07.18 at 19h 00m 19s.xml">
+      <configuration name="DynamoDBUtil Test Suite.query test.query with function beginsWith and filter" configurationId="JavaScriptTestRunnerJest" />
+    </history-entry>
+    <history-entry file="DynamoDBUtil_Test_Suite_query_test_query_with_function_beginsWith_and_filter - 2020.07.18 at 19h 00m 50s.xml">
+      <configuration name="DynamoDBUtil Test Suite.query test.query with function beginsWith and filter" configurationId="JavaScriptTestRunnerJest" />
+    </history-entry>
+    <history-entry file="DynamoDBUtil_Test_Suite_query_test_query_with_function_beginsWith_and_filter - 2020.07.18 at 19h 02m 04s.xml">
+      <configuration name="DynamoDBUtil Test Suite.query test.query with function beginsWith and filter" configurationId="JavaScriptTestRunnerJest" />
+    </history-entry>
+    <history-entry file="DynamoDBUtil_Test_Suite_query_test_query_with_function_beginsWith_and_filter - 2020.07.18 at 19h 02m 49s.xml">
+      <configuration name="DynamoDBUtil Test Suite.query test.query with function beginsWith and filter" configurationId="JavaScriptTestRunnerJest" />
+    </history-entry>
+  </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14658000" />
+    <option name="totallyTimeSpent" value="30363000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="45" y="23" width="1090" height="1027" extended-state="0" />
+    <frame x="40" y="23" width="1640" height="1027" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2673077" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19371068" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info active="true" anchor="bottom" x="1680" y="45" width="1920" height="1035" id="Run" order="2" type="WINDOWED" visible="true" weight="0.3295964" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -221,7 +329,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3295964" />
       <window_info anchor="bottom" id="GraphQL" order="9" />
       <window_info anchor="bottom" id="TypeScript" order="10" />
-      <window_info active="true" anchor="bottom" x="1133" y="45" width="547" height="1005" id="Terminal" order="11" type="WINDOWED" visible="true" weight="0.3295964" />
+      <window_info anchor="bottom" x="1133" y="45" width="547" height="1005" id="Terminal" order="11" type="WINDOWED" visible="true" weight="0.3295964" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -243,13 +351,6 @@
     <entry file="file://$PROJECT_DIR$/dist/dynamodb-util.interface.d.ts" />
     <entry file="file://$PROJECT_DIR$/dist/dynamodb-util.d.ts" />
     <entry file="file://$PROJECT_DIR$/dist/index.js" />
-    <entry file="file://$PROJECT_DIR$/src/dynamodb-util.interface.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="534">
-          <caret line="29" column="24" lean-forward="true" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.MD">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -261,13 +362,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dist/index.d.ts" />
-    <entry file="file://$PROJECT_DIR$/__tests__/index.test.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dist/dynamodb-util.js" />
     <entry file="file://$PROJECT_DIR$/dist/examples/example.js" />
     <entry file="file://$PROJECT_DIR$/dist/src/dynamodb-util.js">
@@ -277,9 +371,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dist/src/index.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/src/index.js" />
     <entry file="file://$PROJECT_DIR$/.npmignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="69">
@@ -301,20 +393,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/examples/example.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/example.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/example.ts" />
+    <entry file="file://$PROJECT_DIR$/examples/example.js" />
+    <entry file="file://$PROJECT_DIR$/dist/package.json" />
     <entry file="file://$PROJECT_DIR$/tsconfig.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="989">
@@ -322,34 +403,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dist/package.json">
+    <entry file="file://$PROJECT_DIR$/examples/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="6" column="67" selection-start-line="6" selection-end-line="7" />
+        <state relative-caret-position="184">
+          <caret line="8" column="2" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="499">
+          <caret line="25" column="4" lean-forward="true" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/dynamodb-util.interface.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="34" column="11" selection-start-line="34" selection-start-column="7" selection-end-line="34" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__tests__/payloads/mock.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="53" column="27" selection-start-line="53" selection-start-column="21" selection-end-line="53" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/dynamodb-util.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="18" column="83" selection-start-line="18" selection-start-column="83" selection-end-line="18" selection-end-column="83" />
+        <state relative-caret-position="279">
+          <caret line="213" column="58" selection-start-line="213" selection-start-column="58" selection-end-line="213" selection-end-column="58" />
           <folding>
             <element signature="e#0#53#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/examples/index.js">
+    <entry file="file://$PROJECT_DIR$/__tests__/index.test.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="2" column="45" selection-start-line="2" selection-start-column="45" selection-end-line="2" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="7" column="19" lean-forward="true" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
+        <state relative-caret-position="668">
+          <caret line="54" column="80" selection-start-line="54" selection-start-column="80" selection-end-line="54" selection-end-column="80" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

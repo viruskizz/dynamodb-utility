@@ -1,6 +1,13 @@
 import * as DynamoDB from 'aws-sdk/clients/dynamodb';
 import { DocumentClient, ScanInput, QueryInput } from 'aws-sdk/clients/dynamodb';
-import {ScanQueryOptions, ScanOptions, DynamoDBUtilOptions} from './dynamodb-util.interface';
+import {
+  ScanQueryOptions,
+  ScanOptions,
+  DynamoDBUtilOptions,
+  QueryOptions,
+  KeyCondition,
+  ConditionFunction
+} from './dynamodb-util.interface';
 
 /**
  * ตัวช่วยทำ operation ต่างๆ บน DynamoDB
@@ -63,15 +70,20 @@ export class DynamodbUtil {
    * @param {body} body เนื้อหาข้อมูลที่ต้อง save ลง database
    */
   update(keys: {[key: string]: string}, body: any) {
-    const time = new Date().getTime();
     return this.get(keys).then(data => {
       const putBody = {
         ...data ,
         ...body,
         ...keys,
-        createdAt: (data && typeof data.createdAt === 'number') ? data.createdAt : time,
-        updatedAt: time,
       };
+      if (this.utilOptions && this.utilOptions.timestamp) {
+        const time = new Date().getTime();
+        body = {
+          ...body,
+          createdAt: (data && typeof data.createdAt === 'number') ? data.createdAt : time,
+          updatedAt: time,
+        };
+      }
       const params = { TableName: this.table, Item: putBody };
       return this.documentClient.put(params).promise()
         .then(() => putBody);
@@ -97,19 +109,30 @@ export class DynamodbUtil {
    * Query Operation บน DynamoDB แบบรองรับ recursive รองรับได้เฉพาะ Attribute lv 1
    * @param {ScanOptions} options รายละเอียดของ Query Param
    */
-  async query(options?: ScanOptions) {
-    if (!options || !options.filter) { throw new Error('key filtered is required'); }
-    const names = this.convertExpressionNames(options.filter);
-    const values = this.convertExpressionValue(options.filter);
-    const condition = this.createConditionExpression(names, values);
+  async query(options?: QueryOptions) {
+    if (!options || !options.keyCondition) { throw new Error('keyCondition filtered is required'); }
+    let names = this.convertExpressionNames(options.keyCondition);
+    let values = this.convertExpressionValue(options.keyCondition);
+    const keyCondition = this.createConditionExpression(options.keyCondition);
+    let filterCondition;
+    if(options.filter) {
+      const filterNames = this.convertExpressionNames(options.filter);
+      const filterValues = this.convertExpressionValue(options.filter);
+      filterCondition = this.createConditionExpression(options.filter);
+      names = Object.assign(names, filterNames);
+      values = Object.assign(values, filterValues);
+    }
     const param: DynamoDB.QueryInput = {
+      IndexName: options.indexName,
       TableName: this.table,
       Limit: options.limit,
       ProjectionExpression: (options.attributes) ? options.attributes.join(', ') : undefined,
       ExpressionAttributeNames: names,
       ExpressionAttributeValues: values,
-      KeyConditionExpression: condition,
+      KeyConditionExpression: keyCondition,
+      FilterExpression: filterCondition || undefined,
     };
+    console.log(param)
     return DynamodbUtil.recursiveOperation(this.documentClient.query(param), param, options)
       .catch(e => {
         console.log(e);
@@ -130,14 +153,15 @@ export class DynamodbUtil {
     if (options && options.filter) {
       const names = this.convertExpressionNames(options.filter);
       const values = this.convertExpressionValue(options.filter);
-      const condition = this.createConditionExpression(names, values);
+      const filterCondition = this.createConditionExpression(options.filter);
       param = {
         ...param,
         ExpressionAttributeNames: names,
         ExpressionAttributeValues: values,
-        FilterExpression: condition,
+        FilterExpression: filterCondition,
       };
     }
+    // return param
     return DynamodbUtil.recursiveOperation(this.documentClient.scan(param), param, options)
       .catch(e => {
         console.log(e);
@@ -175,24 +199,42 @@ export class DynamodbUtil {
     }
     return result;
   }
-  private createConditionExpression(names: string[], values: string[]) {
-    const namesArray = Object.keys(names);
-    const valuesArray = Object.keys(values);
-    const conditions: string[] = [];
-    namesArray.forEach((element, index) => {
-      conditions.push(`${element} = ${valuesArray[index]}`);
-    });
+
+  private createConditionExpression(filterCondition?: KeyCondition | any) {
+    const keys = Object.keys(filterCondition);
+    const conditions: any[] = [];
+    keys.forEach(key => {
+      const keyName = '#' + key.split('.').join('.#');
+      const value = filterCondition[key];
+      const valueKey = ':' + key.replace(/\./, '');
+      let string = '';
+      if(typeof value === 'string') {
+        string = `${keyName} = ${valueKey}`;
+      } else {
+        const condition = Object.keys(filterCondition[key])[0];
+        const valueKey = ':' + key.replace(/\./, '');
+        string = this.mapConditionToString(condition, keyName, valueKey);
+      }
+      conditions.push(string)
+    })
     return conditions.join(' and ');
   }
+
   private convertExpressionValue(filter: any) {
     if (typeof filter === 'string') {
       filter = JSON.parse(filter);
     } else if (typeof  filter !== 'object') {
-      throw new Error('filter is not Object or JSON');
+      throw new Error('filter or keyCondition is not Object or JSON');
     }
     const result: any = {};
     Object.keys(filter).forEach(key => {
-      result[`:${key}`] = filter[key];
+      const keyName = key.replace(/\./, '');
+      const value = filter[key];
+      if (typeof value === 'string') {
+        result[`:${keyName}`] = value;
+      } else {
+        result[`:${keyName}`] = Object.values(value)[0];
+      }
     });
     return result;
   }
@@ -201,12 +243,27 @@ export class DynamodbUtil {
     if (typeof filter === 'string') {
       filter = JSON.parse(filter);
     } else if (typeof  filter !== 'object') {
-      throw new Error('filter is not Object or JSON');
+      throw new Error('filter or keyCondition is not Object or JSON');
     }
     const result: any = {};
     Object.keys(filter).forEach(key => {
-      result[`#${key}`] = key;
+      const keyNames = key.split('.');
+      keyNames.forEach(key => {
+        result[`#${key}`] = key;
+      })
     });
     return result;
+  }
+
+  private mapConditionToString(condition: string, key: string, value: string) {
+    console.log(condition)
+    switch (condition) {
+      case 'equal':
+        return `${key} = conditionValue`;
+      case 'beginsWith':
+        return `begins_with(${key}, ${value})`;
+      default:
+        return `${key} = ${value}`;
+    }
   }
 }
