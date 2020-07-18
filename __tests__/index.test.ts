@@ -50,7 +50,6 @@ describe('DynamoDBUtil Test Suite', () => {
           ['song']: 'song theme 12'
         }
       });
-      console.log(result);
       expect(result).toEqual(expect.arrayContaining([
         expect.objectContaining({ _pkey: 'Album1',  _skey: 'Album1#Araiva#Track2' })
       ]));
@@ -103,7 +102,6 @@ function initDatabase() {
       }))
     }
   };
-  // console.log(params.RequestItems['Static-Data'])
   return docClient.batchWrite(params).promise()
 }
 

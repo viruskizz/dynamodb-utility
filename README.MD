@@ -14,12 +14,16 @@
 ---
 ## Features
 Basic DynamoDB operation in table
-- scan
-- query
 - get
 - put
 - update
 - delete
+- scan
+- query
+
+>*support dynamodb Comparison Operator and Function*
+
+> *support nested attribute filter expression*
 
 ## Installation
 
@@ -47,40 +51,55 @@ Default output format [None]: json
 
 ---
 
+## Example Code
+สามารถดูตัวอย่างการเขียนได้ที่
+
+[example code](https://github.com/viruskizz/dynamodb-utility/tree/master/examples)
+
+---
+
 ## Usage
 โดยพื้นฐานแล้ว Library จะใช้ AWS Environment ที่อยู่บนเครื่องในการตั้งค่า AWS DynamoDB ใน Module
 ```
 import DynamodbUtil from 'dynamodb-utility'
-const userModel = new DynmodbUtil('User-Table');
+const userModel = new DynmodbUtil('User-Table', {
+    region: 'ap-southeast-1',
+    // ...DynamoDBUtilOptions
+});
 ```
 
 Put
 ```
 userModel.put({
-    id: '1',
+    pkey: 'User1',
     skey: 'Profile',
     firstname: 'Araiva',
     lastname: 'Viruskizz',
-    age: 20
+    gender: 'Male',
+    age: 20,
+    address: {
+        province: 'London',
+        country: 'England'
+    }
 }).then(res => console.log(res));
 ```
 
 Get
 ```
-userModel.put({ id: '1', skey: 'Profile'})
+userModel.get({ pkey: 'User1', skey: 'Profile'})
     .then(res => console.log(res));
 ```
 
 Update
 ```
-userModel.update({ id: '1', skey: 'Profile'}, {
+userModel.update({ id: 'User1', skey: 'Profile'}, {
     age: 20
 }).then(res => console.log(res));
 ```
 
 Delete
 ```
-userModel.delete({ id: '1', skey: 'Profile' })
+userModel.delete({ pkey: 'User1', skey: 'Profile' })
     .then(res => console.log(res));
 ```
 
@@ -89,22 +108,33 @@ Scan
 userModel.scan().then(res => console.log(res));
 
 // or by pass argument scan option
+// DynamodbUtil.query(ScanOptions);
 userModel.scan({
     filter: {
-        fistname: 'araiva',
-    };
-    attributes: ['firstname', 'lastname', 'age'];
+        gender: 'Male',
+        age: {
+            greaterThan: 10
+        },
+        'address.country': 'England'
+    },
+    attributes: ['firstname', 'lastname', 'age']
 }).then(res => console.log(res));
 ```
 
 Query
 ```
+// DynamodbUtil.query(QueryOptions);
 userModel.query({
-    filter: { id: '1' };
+    keyCondition: {
+        pkey: 'User1',
+        skey: {
+            beginsWith: 'Profile'
+        }
+    }
 }).then(res => console.log(res));
 ```
 
-## Documentation
+## Attribute Reference
 DynamoDBUtilOptions
 
 | Variable        | Type          | Required  | Default  |
@@ -113,6 +143,47 @@ DynamoDBUtilOptions
 | timestamp       | boolean       | false     | NO|
 | accessKeyIds    | string        | false     | env: `AWS_ACCESS_KEY`|
 | secretAccessKey | string        | false     | env: `AWS_SECRET_KEY`|
+
+ScanOptions
+
+| Variable        | Type            | Required  | Description  |
+| --------------- |:---------------:| ---------:| --------:|
+| filter         | KeyCondition     | true      | เงื่อนไขการกรอง ดู KeyCondition เพิ่มเติม|
+| limit          | string           | false     | จำกัดจำนวนผลลัพธ์ |
+| lastKey        | boolean          | false     | Key สุดท้ายเพื่อทำ Pagination |
+| times          | string           | false     | จำนวนรอบของการแสกน |
+| indexName      | string           | false     | ชื่อ index กรณีใช้ GSI หรือ LSI|
+| attributes     | Array<string>    | false     | Attribute ที่ต้องการเลือกออกมาแสดง|
+
+QueryOptions  *(extended from ScanOptions)*
+
+| Variable        | Type            | Required  | Description  |
+| --------------- |:---------------:| ---------:| --------:|
+| keyCondition    | KeyCondition     | false      | เงื่อนไขการ Query ดู KeyCondition เพิ่มเติม|
+| filter          | KeyCondition     | false      | เงื่อนไขการกรอง ดู KeyCondition เพิ่มเติม|
+
+KeyCondition
+
+```
+Attribute: 'Value'
+  
+Or 
+  
+Attribute: {
+    ConditionFunction: 'Value'
+}
+```
+ConditionFunction ที่สามารถเรียกใช้งานได้
+- equal
+- greaterThan
+- lessThan
+- attributeExists
+- attributeNotExists
+- beginsWith
+- contains
+
+ดูรายละเอียดเพิ่มเติ่ม [Comparison Operator and Function Reference
+](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.OperatorsAndFunctions.html)
 
 ## Contributors
 

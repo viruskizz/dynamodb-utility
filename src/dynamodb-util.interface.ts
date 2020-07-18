@@ -21,46 +21,39 @@ export interface ScanQueryOptions {
   includeDetails?: string | boolean;
 }
 
-// Interface is below
-export interface ScanOptions {
-  limit?: number;
-  lastKey?: object;
-  times?: number;
-  filter?: {
-    [x: string]: string,
-  };
-  attributes?: string[];
-}
-
-export type ConditionFunction =
-  'equal' |
-  'greaterThan' |
-  'lessThan' |
-  'attribute_exists' |
-  'attribute_not_exists' |
-  'beginsWith' |
-  'contains' |
-  'size'
-export type KeyCondition = {
-  [x: string]: {
-    [cnfn in ConditionFunction | string]: string | null
-  } | string,
-}
-export interface QueryOptions {
-  limit?: number;
-  lastKey?: object;
-  times?: number
-  indexName?: string,
-  filter?: {
-    [x: string]: string,
-  };
-  keyCondition: KeyCondition
-  attributes?: string[];
-}
 
 export interface DynamoDBUtilOptions {
   region?: string;
   timestamp?: boolean;
   accessKeyId?: string;
   secretAccessKey?: string;
+}
+
+// Interface is below
+export interface ScanOptions {
+  limit?: number;
+  lastKey?: object;
+  times?: number;
+  indexName?: string,
+  filter?: KeyCondition;
+  attributes?: string[];
+}
+
+export interface QueryOptions extends  ScanOptions {
+  keyCondition: KeyCondition
+}
+
+export type ConditionFunction =
+  'equal' |
+  'greaterThan' |
+  'lessThan' |
+  'attributeExists' |
+  'attributeNotExists' |
+  'beginsWith' |
+  'contains'
+
+export type KeyCondition = {
+  [x: string]: {
+    [cnfn in ConditionFunction | string]: string | null
+  } | string,
 }

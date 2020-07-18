@@ -123,8 +123,8 @@ export class DynamodbUtil {
       values = Object.assign(values, filterValues);
     }
     const param: DynamoDB.QueryInput = {
-      IndexName: options.indexName,
       TableName: this.table,
+      IndexName: options.indexName,
       Limit: options.limit,
       ProjectionExpression: (options.attributes) ? options.attributes.join(', ') : undefined,
       ExpressionAttributeNames: names,
@@ -132,7 +132,6 @@ export class DynamodbUtil {
       KeyConditionExpression: keyCondition,
       FilterExpression: filterCondition || undefined,
     };
-    console.log(param)
     return DynamodbUtil.recursiveOperation(this.documentClient.query(param), param, options)
       .catch(e => {
         console.log(e);
@@ -147,6 +146,7 @@ export class DynamodbUtil {
   async scan(options?: ScanOptions) {
     let param: DynamoDB.ScanInput = {
       TableName: this.table,
+      IndexName: (options && options.indexName) ?  options.indexName : undefined,
       Limit: (options && options.limit) ? options.limit : undefined,
       ProjectionExpression: (options && options.attributes) ? options.attributes.join(', ') : undefined,
     };
@@ -200,23 +200,25 @@ export class DynamodbUtil {
     return result;
   }
 
+  private createValueKey = (key: string) =>  ':' + key.replace(/\./, '');
+  private createKeyName = (key: string) =>  '#' + key.split('.').join('.#');
+
   private createConditionExpression(filterCondition?: KeyCondition | any) {
-    const keys = Object.keys(filterCondition);
     const conditions: any[] = [];
-    keys.forEach(key => {
-      const keyName = '#' + key.split('.').join('.#');
+    Object.keys(filterCondition).forEach(key => {
+      const keyName = this.createKeyName(key);
+      const valueKey = this.createValueKey(key);
       const value = filterCondition[key];
-      const valueKey = ':' + key.replace(/\./, '');
       let string = '';
       if(typeof value === 'string') {
-        string = `${keyName} = ${valueKey}`;
+        string = DynamodbUtil.mapConditionToString('equal', keyName, valueKey);
       } else {
         const condition = Object.keys(filterCondition[key])[0];
-        const valueKey = ':' + key.replace(/\./, '');
-        string = this.mapConditionToString(condition, keyName, valueKey);
+        const valueKey = this.createValueKey(key);
+        string = DynamodbUtil.mapConditionToString(condition, keyName, valueKey);
       }
       conditions.push(string)
-    })
+    });
     return conditions.join(' and ');
   }
 
@@ -255,12 +257,21 @@ export class DynamodbUtil {
     return result;
   }
 
-  private mapConditionToString(condition: string, key: string, value: string) {
-    console.log(condition)
+  private static mapConditionToString(condition: string, key: string, value: string | null) {
     switch (condition) {
       case 'equal':
-        return `${key} = conditionValue`;
+        return `${key} = ${value}`;
+      case 'greaterThan':
+        return `${key} > ${value}`;
+      case 'lessThan':
+        return `${key} < ${value}`;
+      case 'attributeExists':
+        return `attribute_exists(${key})`;
+      case 'attributeNotExists':
+        return `attribute_not_exists(${key})`;
       case 'beginsWith':
+        return `begins_with(${key}, ${value})`;
+      case 'contains':
         return `begins_with(${key}, ${value})`;
       default:
         return `${key} = ${value}`;
