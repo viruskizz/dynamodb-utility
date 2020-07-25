@@ -89,6 +89,39 @@ describe('DynamoDBUtil Test Suite', () => {
       expect(data.Item).toHaveProperty('country');
       expect(data.Item).toHaveProperty('population');
     });
+  });
+
+  describe('patch testing', () => {
+    test('patch nest attribute', async () => {
+      const key = {_pkey: 'Album1', _skey: 'Album1#Virus#Track4'};
+      const duration =  200;
+      const result = await dataModel.patch(key, {
+        'attribute.duration': duration
+      });
+      // expected return
+      expect(result).toMatchObject({ ...key});
+
+      // expected database updated
+      const data = await docClient.get({TableName: TABLE, Key: key}).promise();
+      // console.log('updated Data: ', data)
+      expect(data.Item?.artist).toBe('Virus');
+      expect(data.Item?.attribute.duration).toBe(200);
+      expect(data.Item?.attribute.country).toBe('Thailand');
+    });
+
+    test('patch lv1 attribute', async () => {
+      const key = {_pkey: 'Album2', _skey: 'Album2#Araiva#Track1'};
+      const result = await dataModel.patch(key, {
+        'artist': 'Virus'
+      });
+      // expected return
+      expect(result).toMatchObject({ ...key});
+
+      // expected database updated
+      const data = await docClient.get({TableName: TABLE, Key: key}).promise();
+      console.log('updated Data: ', data);
+      expect(data.Item?.artist).toBe('Virus');
+    });
   })
 });
 
