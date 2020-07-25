@@ -92,7 +92,7 @@ export class DynamodbUtil {
 
   patch(keys: {[key: string]: string}, body: any): Promise<any> {
     let names = this.convertExpressionNames(body);
-    let values = this.convertExpressionValue(body);
+    let values = this.convertExpressionValue(body, true);
     let expressions: string[] = [];
     Object.keys(body).forEach(key => {
       const keyName = this.createKeyName(key);
@@ -243,8 +243,7 @@ export class DynamodbUtil {
     return conditions.join(' and ');
   }
 
-  private convertExpressionValue(filter: any) {
-    console.log(filter)
+  private convertExpressionValue(filter: any, isnNestObject = false) {
     if (typeof filter === 'string') {
       filter = JSON.parse(filter);
     } else if (typeof  filter !== 'object') {
@@ -254,7 +253,7 @@ export class DynamodbUtil {
     Object.keys(filter).forEach(key => {
       const keyName = key.replace(/\./, '');
       const value = filter[key];
-      if (typeof value !== 'object') {
+      if (typeof value !== 'object' || isnNestObject) {
         result[`:${keyName}`] = value;
       } else {
         result[`:${keyName}`] = Object.values(value)[0];

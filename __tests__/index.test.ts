@@ -109,6 +109,24 @@ describe('DynamoDBUtil Test Suite', () => {
       expect(data.Item?.attribute.country).toBe('Thailand');
     });
 
+    test('patch nest attribute with array', async () => {
+      const key = {_pkey: 'Album1', _skey: 'Album1#Virus#Track5'};
+      const tags =  ['cc', 'dd'];
+      const result = await dataModel.patch(key, {
+        'attribute.tags': tags
+      });
+      // expected return
+      expect(result).toMatchObject({ ...key});
+
+      // expected database updated
+      const data = await docClient.get({TableName: TABLE, Key: key}).promise();
+      // console.log('updated Data: ', data)
+      expect(data.Item?.artist).toBe('Virus');
+      expect(data.Item?.attribute.tags).toContain('cc');
+      expect(data.Item?.attribute.tags).toContain('dd');
+      expect(data.Item?.attribute.country).toBe('England');
+    });
+
     test('patch lv1 attribute', async () => {
       const key = {_pkey: 'Album2', _skey: 'Album2#Araiva#Track1'};
       const result = await dataModel.patch(key, {

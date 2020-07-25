@@ -76,7 +76,8 @@
     "artist": "Virus",
     "attribute": {
       "duration": 200,
-      "country": "England"
+      "country": "England",
+      "tags": ["aa", "bb"]
     }
   },
   {
