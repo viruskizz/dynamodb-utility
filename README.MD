@@ -17,6 +17,7 @@ Basic DynamoDB operation in table
 - get
 - put
 - update
+- patch
 - delete
 - scan
 - query
@@ -94,6 +95,14 @@ Update
 ```
 userModel.update({ id: 'User1', skey: 'Profile'}, {
     age: 20
+}).then(res => console.log(res));
+```
+
+Patch
+```
+userModel.patch({ id: 'User1', skey: 'Profile'}, {
+    age: 20,
+    'address.province': 'Man Chester'
 }).then(res => console.log(res));
 ```
 
