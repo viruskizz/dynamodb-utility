@@ -170,7 +170,7 @@ QueryOptions  *(extended from ScanOptions)*
 | --------------- |:---------------:| ---------:| --------:|
 | keyCondition    | KeyCondition     | false    | เงื่อนไขการ Query ดู KeyCondition เพิ่มเติม|
 | filter          | KeyCondition     | false    | เงื่อนไขการกรอง ดู KeyCondition เพิ่มเติม|
-| sort            | 'DESC' | 'ASC'   | false    | เรียงลำดับตาม sort key ,default: ASC
+| sort            | 'DESC' or 'ASC'  | false    | เรียงลำดับตาม sort key ,default: ASC
 
 KeyCondition
 

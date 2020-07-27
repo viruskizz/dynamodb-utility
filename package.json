@@ -6,8 +6,7 @@
   "scripts": {
     "link": "tsc && copy /Y package.json dist && copy /Y readme.md dist && cd dist && npm link",
     "test": "jest",
-    "build": "tsc",
-    "preversion": "npm run build && git add -A"
+    "build": "tsc"
   },
   "types": "dist/index.d.ts",
   "dependencies": {
