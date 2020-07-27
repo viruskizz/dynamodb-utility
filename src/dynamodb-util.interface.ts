@@ -40,7 +40,8 @@ export interface ScanOptions {
 }
 
 export interface QueryOptions extends  ScanOptions {
-  keyCondition: KeyCondition
+  keyCondition: KeyCondition;
+  sort?: 'DESC' | 'ASC' | string;
 }
 
 export type ConditionFunction =

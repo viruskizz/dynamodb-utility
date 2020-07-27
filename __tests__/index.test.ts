@@ -55,6 +55,19 @@ describe('DynamoDBUtil Test Suite', () => {
       ]));
       expect(result).toHaveLength(1);
     });
+
+    test('query with sort DESC', async () => {
+      const result = await dataModel.query({
+        keyCondition: {
+          _pkey: 'Album1',
+        },
+        sort: 'DESC'
+      });
+      expect(result[0]).toMatchObject({
+        _pkey: 'Album1',
+        _skey: 'Album1#Virus#Track5'
+      })
+    });
   });
 
   describe('scan', () => {

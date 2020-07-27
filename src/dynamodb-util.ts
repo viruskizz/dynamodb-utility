@@ -152,6 +152,7 @@ export class DynamodbUtil {
       ExpressionAttributeValues: values,
       KeyConditionExpression: keyCondition,
       FilterExpression: filterCondition || undefined,
+      ScanIndexForward: (options.sort === 'ASC') ? true : (options.sort === 'DESC') ? false : undefined
     };
     return DynamodbUtil.recursiveOperation(this.documentClient.query(param), param, options)
       .catch(e => {
