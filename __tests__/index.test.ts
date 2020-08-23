@@ -71,7 +71,7 @@ describe('DynamoDBUtil Test Suite', () => {
   });
 
   describe('scan', () => {
-    test('query with function beginsWith and filter', async () => {
+    test('scan with function equal and nested object', async () => {
       const result = await dataModel.scan({
         filter: {
           ['artist']: 'Araiva',
@@ -83,7 +83,21 @@ describe('DynamoDBUtil Test Suite', () => {
       ]));
       expect(result).toHaveLength(1);
     });
-  })
+
+    test('scan with function contains', async () => {
+      const result = await dataModel.scan({
+        filter: {
+          _skey: {
+            contains: 'Virus'
+          },
+        }
+      });
+      expect(result).toEqual(expect.arrayContaining([
+        expect.objectContaining({ artist: 'Virus'})
+      ]));
+      expect(result).toHaveLength(3);
+    });
+  });
 
   describe('update testing', () => {
     test('update add new body', async () => {

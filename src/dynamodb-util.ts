@@ -294,7 +294,7 @@ export class DynamodbUtil {
       case 'beginsWith':
         return `begins_with(${key}, ${value})`;
       case 'contains':
-        return `begins_with(${key}, ${value})`;
+        return `contains(${key}, ${value})`;
       default:
         return `${key} = ${value}`;
     }
