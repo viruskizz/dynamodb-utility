@@ -97,6 +97,21 @@ describe('DynamoDBUtil Test Suite', () => {
       ]));
       expect(result).toHaveLength(3);
     });
+
+    test('scan with lastKey', async () => {
+      const result = await dataModel.scan({
+        lastKey: {
+          _pkey: 'TestPopulation',
+          _skey: 'TestPopulation-1'
+        },
+        limit: 3
+      });
+      expect(result).toEqual(expect.arrayContaining([
+        expect.objectContaining(
+          {_pkey: 'TestPopulation', _skey: 'TestPopulation-2' }
+        )
+      ]));
+    });
   });
 
   describe('update testing', () => {

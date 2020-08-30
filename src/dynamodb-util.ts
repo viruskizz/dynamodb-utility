@@ -1,5 +1,5 @@
 import * as DynamoDB from 'aws-sdk/clients/dynamodb';
-import { DocumentClient, ScanInput, QueryInput } from 'aws-sdk/clients/dynamodb';
+import {DocumentClient, ScanInput, QueryInput, Key} from 'aws-sdk/clients/dynamodb';
 import {
   ScanQueryOptions,
   ScanOptions,
@@ -152,7 +152,8 @@ export class DynamodbUtil {
       ExpressionAttributeValues: values,
       KeyConditionExpression: keyCondition,
       FilterExpression: filterCondition || undefined,
-      ScanIndexForward: (options.sort === 'ASC') ? true : (options.sort === 'DESC') ? false : undefined
+      ScanIndexForward: (options.sort === 'ASC') ? true : (options.sort === 'DESC') ? false : undefined,
+      ExclusiveStartKey: options.lastKey ? options.lastKey as Key : undefined,
     };
     return DynamodbUtil.recursiveOperation(this.documentClient.query(param), param, options)
       .catch(e => {
@@ -171,6 +172,7 @@ export class DynamodbUtil {
       IndexName: (options && options.indexName) ?  options.indexName : undefined,
       Limit: (options && options.limit) ? options.limit : undefined,
       ProjectionExpression: (options && options.attributes) ? options.attributes.join(', ') : undefined,
+      ExclusiveStartKey: (options && options.lastKey) ? options.lastKey as Key : undefined,
     };
     if (options && options.filter) {
       const names = this.convertExpressionNames(options.filter);
