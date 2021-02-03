@@ -21,6 +21,7 @@ Basic DynamoDB operation in table
 - delete
 - scan
 - query
+- raw
 
 >*support dynamodb Comparison Operator and Function*
 
@@ -141,6 +142,14 @@ userModel.query({
         }
     }
 }).then(res => console.log(res));
+```
+
+Raw (Use Raw DynamodbClient)
+```
+// DynamodbUtil.raw.scan(ScanParam);
+userModel.raw.scan({
+    Table: 'User-Table'
+}).promise().then(res => console.log(res.Items));
 ```
 
 ## Attribute Reference

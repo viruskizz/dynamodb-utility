@@ -17,6 +17,7 @@ export class DynamodbUtil {
   private documentClient: DocumentClient;
   private readonly utilOptions: DynamoDBUtilOptions | undefined;
   private readonly table: string;
+  public readonly raw: DocumentClient;
 
   constructor(table: string, utilOptions?: DynamoDBUtilOptions) {
     this.documentClient = new DocumentClient({
@@ -29,7 +30,9 @@ export class DynamodbUtil {
     });
     this.table = table;
     this.utilOptions = utilOptions;
+    this.raw = this.documentClient;
   }
+
 
   /**
    * เรียกข้อมูลแบบ get item จาก DynamoDB

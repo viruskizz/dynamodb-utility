@@ -20,6 +20,18 @@ describe('DynamoDBUtil Test Suite', () => {
     });
   });
 
+  describe('raw documentClient testing', () => {
+    test('scan by raw', async () => {
+      const result = await dataModel.raw.scan({
+        TableName: 'Static-Table',
+      }).promise();
+      // console.log(result);
+      expect(result.Items).toEqual(expect.arrayContaining([
+        expect.objectContaining({ _pkey: 'Album2',  _skey: 'Album2#Araiva#Track1' })
+      ]));
+    });
+  });
+
   describe('query test', () => {
     test('query with function beginsWith', async () => {
       const result = await dataModel.query({
@@ -66,6 +78,19 @@ describe('DynamoDBUtil Test Suite', () => {
       expect(result[0]).toMatchObject({
         _pkey: 'Album1',
         _skey: 'Album1#Virus#Track5'
+      })
+    });
+
+    test('query with attributes DESC', async () => {
+      const result = await dataModel.query({
+        keyCondition: {
+          _pkey: 'Album1',
+        },
+        attributes: ['artist']
+      });
+      console.log(result);
+      expect(result[0]).toMatchObject({
+        artist: expect.any(String),
       })
     });
   });
