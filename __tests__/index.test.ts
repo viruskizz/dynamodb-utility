@@ -15,9 +15,14 @@ afterAll(() => clearDatabase());
 
 describe('DynamoDBUtil Test Suite', () => {
   describe('jest testing', () => {
-    test('simple test', () => {
+    test('simple test', async () => {
       expect(1).toBe(1);
+      const result = await dataModel.scan({
+        // times: 0,
+      });
+      console.log(result);
     });
+
   });
 
   describe('raw documentClient testing', () => {
