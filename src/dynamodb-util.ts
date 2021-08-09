@@ -158,7 +158,7 @@ export class DynamodbUtil {
       ScanIndexForward: (options.sort === 'ASC') ? true : (options.sort === 'DESC') ? false : undefined,
       ExclusiveStartKey: options.lastKey ? options.lastKey as Key : undefined,
     };
-    return DynamodbUtil.recursiveOperation(this.documentClient.query(param), param, options)
+    return this.recursiveOperation('QUERY', param, options)
       .catch(e => {
         console.log(e);
         throw new Error(e);
@@ -189,7 +189,7 @@ export class DynamodbUtil {
       };
     }
     // return param
-    return DynamodbUtil.recursiveOperation(this.documentClient.scan(param), param, options)
+    return this.recursiveOperation('SCAN', param, options)
       .catch(e => {
         console.log(e);
         throw new Error(e);
@@ -207,14 +207,22 @@ export class DynamodbUtil {
 
   /**
    * Recursive function for Scan and Query operation
-   * @param optFn
+   * @param fnName
    * @param param
    * @param {ScanOptions} options
    */
-  private static async recursiveOperation(optFn: any, param: ScanInput | QueryInput, options?: ScanOptions)
+  private async recursiveOperation(fnName: string, param: ScanInput | QueryInput, options?: ScanOptions)
     : Promise<any[]> {
     let result: any[] = [];
     let count = 1;
+    let optFn;
+    if (fnName === 'SCAN') {
+      optFn = this.documentClient.scan(param)
+    }
+    if (fnName === 'QUERY') {
+      optFn = this.documentClient.query(param)
+    }
+    if(!fnName || !optFn) { return []; }
     while (true) {
       const data = await optFn.promise();
       result = [...result, ...data.Items];
