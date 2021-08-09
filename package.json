@@ -1,6 +1,6 @@
 {
   "name": "dynamodb-utility",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Simple DynamoDB Utility",
   "main": "dist/index.js",
   "scripts": {
