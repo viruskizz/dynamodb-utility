@@ -216,14 +216,14 @@ export class DynamodbUtil {
     let result: any[] = [];
     let count = 1;
     let optFn;
-    if (fnName === 'SCAN') {
-      optFn = this.documentClient.scan(param)
-    }
-    if (fnName === 'QUERY') {
-      optFn = this.documentClient.query(param)
-    }
-    if(!fnName || !optFn) { return []; }
     while (true) {
+      if (fnName === 'SCAN') {
+        optFn = this.documentClient.scan(param)
+      }
+      if (fnName === 'QUERY') {
+        optFn = this.documentClient.query(param)
+      }
+      if(!fnName || !optFn) { return []; }
       const data = await optFn.promise();
       result = [...result, ...data.Items];
       param = {...param, ExclusiveStartKey: data.LastEvaluatedKey};
