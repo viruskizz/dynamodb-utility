@@ -219,9 +219,9 @@ export class DynamodbUtil {
       const data = await optFn.promise();
       result = [...result, ...data.Items];
       param = {...param, ExclusiveStartKey: data.LastEvaluatedKey};
-      if (!options || !options.times) { return result; }
-      if (options.times && count === +options.times) { break; }
+      if (!options || options.times === undefined || options.times === null) { return result; }
       if (!data.LastEvaluatedKey) { break; }
+      if (options.times && count === +options.times) { break; }
       count++;
     }
     return result;
