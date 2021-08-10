@@ -315,8 +315,6 @@ export class DynamodbUtil {
         result[`#${key}`] = key;
       })
     });
-    console.log('attributes: ', attributes);
-    console.log('Names: ', result);
     return result;
   }
 

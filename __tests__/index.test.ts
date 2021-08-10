@@ -47,7 +47,7 @@ describe('DynamoDBUtil Test Suite', () => {
         },
         attributes: ['artist', '_pkey', 'attribute.duration'],
       });
-      console.log(result);
+      // console.log(result);
       expect(result).toEqual(expect.arrayContaining([
         expect.objectContaining({ _pkey: 'Album1', artist: expect.any(String) })
       ]));
