@@ -146,11 +146,17 @@ export class DynamodbUtil {
       names = Object.assign(names, filterNames);
       values = Object.assign(values, filterValues);
     }
+    let projectionExpression;
+    if(options.attributes) {
+      let projectionName = this.convertAttributeNames(options.attributes);
+      projectionExpression = this.convertProjectionName(options.attributes);
+      names = {...names, ...projectionName}
+    }
     const param: DynamoDB.QueryInput = {
       TableName: this.table,
       IndexName: options.indexName,
       Limit: options.limit,
-      ProjectionExpression: (options.attributes) ? options.attributes.join(', ') : undefined,
+      ProjectionExpression: projectionExpression,
       ExpressionAttributeNames: names,
       ExpressionAttributeValues: values,
       KeyConditionExpression: keyCondition,
@@ -188,7 +194,16 @@ export class DynamodbUtil {
         FilterExpression: filterCondition,
       };
     }
-    // return param
+    if(options && options.attributes) {
+      let projectionExpression;
+      let projectionName = this.convertAttributeNames(options.attributes);
+      projectionExpression = this.convertProjectionName(options.attributes);
+      param = {
+        ...param,
+        ProjectionExpression: projectionExpression,
+        ExpressionAttributeNames: {...param.ExpressionAttributeNames, ...projectionName}
+      }
+    }
     return this.recursiveOperation('SCAN', param, options)
       .catch(e => {
         console.log(e);
@@ -290,6 +305,23 @@ export class DynamodbUtil {
       })
     });
     return result;
+  }
+
+  private convertAttributeNames(attributes: string[]) {
+    const result: any = {};
+    attributes.forEach(key => {
+      const keyNames = key.split('.');
+      keyNames.forEach(key => {
+        result[`#${key}`] = key;
+      })
+    });
+    console.log('attributes: ', attributes);
+    console.log('Names: ', result);
+    return result;
+  }
+
+  private convertProjectionName(attributes: string[]) {
+    return attributes.map(attr => attr.split('.').map(name => '#' + name).join('.')).join(', ');
   }
 
   private static mapConditionToString(condition: string, key: string, value: string | null) {

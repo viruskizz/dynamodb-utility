@@ -17,12 +17,41 @@ describe('DynamoDBUtil Test Suite', () => {
   describe('jest testing', () => {
     test('simple test', async () => {
       expect(1).toBe(1);
-      const result = await dataModel.scan({
-        // times: 0,
-      });
-      console.log(result);
+      // const result = await dataModel.scan({
+      //   filter: {
+      //     _pkey: 'Album1'
+      //   },
+      //   attributes: ['artist', '_pkey'],
+      // });
+      // console.log(result);
     });
 
+  });
+
+  describe('attributes projection test', () => {
+    test('scan with attributes', async () => {
+      const result = await dataModel.scan({
+        filter: {
+          _pkey: 'Album1'
+        },
+        attributes: ['artist', '_pkey'],
+      });
+      expect(result).toEqual(expect.arrayContaining([
+        expect.objectContaining({ _pkey: 'Album1', artist: expect.any(String) })
+      ]));
+    });
+    test('query with attributes', async () => {
+      const result = await dataModel.query({
+        keyCondition: {
+          _pkey: 'Album1'
+        },
+        attributes: ['artist', '_pkey', 'attribute.duration'],
+      });
+      console.log(result);
+      expect(result).toEqual(expect.arrayContaining([
+        expect.objectContaining({ _pkey: 'Album1', artist: expect.any(String) })
+      ]));
+    });
   });
 
   describe('raw documentClient testing', () => {
@@ -93,7 +122,6 @@ describe('DynamoDBUtil Test Suite', () => {
         },
         attributes: ['artist']
       });
-      console.log(result);
       expect(result[0]).toMatchObject({
         artist: expect.any(String),
       })
